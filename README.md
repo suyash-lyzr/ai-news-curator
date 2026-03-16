@@ -5,7 +5,7 @@ AI-powered news curator that fetches the latest AI news from the web and Twitter
 ## Run
 
 ```bash
-npx @open-gitagent/gitagent run -r https://github.com/suyashmankar/ai-news-curator
+npx @open-gitagent/gitagent run -r https://github.com/suyash-lyzr/ai-news-curator
 ```
 
 ## What It Can Do
