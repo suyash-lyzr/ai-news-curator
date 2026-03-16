@@ -1,0 +1,3 @@
+documents:
+  - path: ai-sources.md
+    always_load: true

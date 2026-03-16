@@ -1,0 +1,30 @@
+spec_version: "0.1.0"
+name: ai-news-curator
+version: 1.0.0
+description: AI-powered news curator that fetches the latest AI news from the web and Twitter, then emails you a digest
+author: suyashmankar
+license: MIT
+model:
+  preferred: claude-sonnet-4-5-20250929
+  fallback:
+    - claude-haiku-4-5-20251001
+  constraints:
+    temperature: 0.3
+    max_tokens: 8192
+skills:
+  - fetch-news
+  - fetch-twitter
+  - send-email-digest
+tools:
+  - web-search
+  - twitter-search
+  - email-send
+runtime:
+  max_turns: 20
+  timeout: 180
+tags:
+  - ai-news
+  - curator
+  - email-digest
+  - twitter
+  - research

@@ -1,0 +1,18 @@
+name: email-send
+description: Compose and send a formatted email digest with curated AI news
+input_schema:
+  type: object
+  properties:
+    to:
+      type: string
+      description: Recipient email address
+    subject:
+      type: string
+      description: Email subject line (e.g., "AI News Digest — 2026-03-17")
+    body:
+      type: string
+      description: Formatted email body in Markdown with categorized news items
+  required:
+    - to
+    - subject
+    - body

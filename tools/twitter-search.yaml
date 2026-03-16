@@ -1,0 +1,15 @@
+name: twitter-search
+description: Search Twitter/X for trending AI posts, announcements, and discussions
+input_schema:
+  type: object
+  properties:
+    query:
+      type: string
+      description: Search query for Twitter/X AI content (e.g., "AI model release site:x.com")
+    accounts:
+      type: array
+      items:
+        type: string
+      description: Specific Twitter handles to check (e.g., ["@OpenAI", "@AnthropicAI"])
+  required:
+    - query
