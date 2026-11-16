@@ -41,10 +41,23 @@ ai-news-curator/
 │   ├── web-search.yaml
 │   ├── twitter-search.yaml
 │   └── email-send.yaml
-└── knowledge/
-    ├── index.yaml
-    └── ai-sources.md
+├── knowledge/
+│   ├── index.yaml
+│   └── ai-sources.md
+└── dashboard/
+    ├── server.py
+    └── static/
 ```
+
+## Dashboard
+
+A local browser briefing of recent AI stories from public RSS feeds. It does not use the gitagent runtime.
+
+```bash
+python3 dashboard/server.py
+```
+
+Then open http://127.0.0.1:8787. See `dashboard/README.md` for how caching works.
 
 ## Built with
 
