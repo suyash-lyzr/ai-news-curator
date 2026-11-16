@@ -1,0 +1,434 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Today in AI</title>
+  <meta name="description" content="A live briefing of AI research, product launches, and industry reporting from public feeds." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='3' fill='%231b1814'/%3E%3Ctext x='4' y='22' font-family='Georgia' font-size='14' fill='%23f4efe6'%3EAi%3C/text%3E%3C/svg%3E" />
+  <style>
+    @font-face {
+      font-family: "Newsreader";
+      src: url("/fonts/newsreader-400.woff2") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Newsreader";
+      src: url("/fonts/newsreader-400i.woff2") format("woff2");
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Newsreader";
+      src: url("/fonts/newsreader-600.woff2") format("woff2");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Figtree";
+      src: url("/fonts/figtree-500.woff2") format("woff2");
+      font-weight: 500;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Figtree";
+      src: url("/fonts/figtree-600.woff2") format("woff2");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+
+    :root {
+      --bg: #e8dfd0;
+      --ink: #1b1814;
+      --muted: #5f584e;
+      --line: #d2c7b4;
+      --paper: #f7f3ea;
+      --research: #1c6b45;
+      --products: #b4531e;
+      --industry: #1e4f8a;
+      --banner: #f4e2c8;
+      --banner-ink: #6a3b12;
+      color-scheme: light;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root {
+        --bg: #131210;
+        --ink: #f4efe6;
+        --muted: #b7ad9e;
+        --line: #3a342c;
+        --paper: #221f1b;
+        --research: #8ed4b0;
+        --products: #f0a36a;
+        --industry: #9ec0ef;
+        --banner: #3a2c1c;
+        --banner-ink: #f3d7b0;
+        color-scheme: dark;
+      }
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background:
+        radial-gradient(rgba(70, 50, 20, 0.035) 0.7px, transparent 0.7px),
+        var(--bg);
+      background-size: 3px 3px, auto;
+      color: var(--ink);
+      font-family: "Figtree", "Avenir Next", "Segoe UI", sans-serif;
+      font-weight: 500;
+      line-height: 1.45;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      body {
+        background:
+          radial-gradient(rgba(255, 244, 220, 0.025) 0.7px, transparent 0.7px),
+          var(--bg);
+        background-size: 3px 3px, auto;
+      }
+    }
+
+    a { color: inherit; }
+
+    a:focus-visible,
+    .skip:focus {
+      outline: 2px solid var(--ink);
+      outline-offset: 3px;
+    }
+
+    .skip {
+      position: absolute;
+      left: 12px;
+      top: -40px;
+      background: var(--paper);
+      color: var(--ink);
+      padding: 8px 12px;
+      z-index: 3;
+    }
+
+    .skip:focus { top: 12px; }
+
+    .folio {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      padding: 10px 24px;
+      border-bottom: 1px solid var(--line);
+      font-size: 11px;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .stripe { display: flex; height: 4px; }
+    .stripe span { flex: 1; }
+    .swatch { display: inline-block; width: 9px; height: 9px; margin-right: 8px; }
+    .swatch.research, .stripe .research { background: var(--research); }
+    .swatch.products, .stripe .products { background: var(--products); }
+    .swatch.industry, .stripe .industry { background: var(--industry); }
+
+    .wrap {
+      max-width: 1120px;
+      margin: 0 auto;
+      padding: 0 24px 72px;
+    }
+
+    .masthead {
+      display: grid;
+      grid-template-columns: minmax(0, 1fr) auto;
+      gap: 24px 32px;
+      align-items: end;
+      padding: 28px 0 20px;
+    }
+
+    .kicker {
+      margin: 0;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+    }
+
+    h1 {
+      margin: 8px 0 0;
+      font-family: "Newsreader", Georgia, "Iowan Old Style", serif;
+      font-weight: 400;
+      font-size: clamp(56px, 8vw, 92px);
+      letter-spacing: -0.04em;
+      line-height: 0.86;
+    }
+
+    h1 em { font-style: italic; }
+
+    .dek {
+      margin: 4px 0 18px;
+      max-width: 40rem;
+      font-family: "Newsreader", Georgia, serif;
+      font-style: italic;
+      font-weight: 400;
+      font-size: 21px;
+      line-height: 1.35;
+      color: var(--muted);
+    }
+
+    .dateblock {
+      text-align: right;
+      min-width: 12rem;
+    }
+
+    .dateblock p { margin: 0; }
+    .dateblock .day {
+      font-family: "Newsreader", Georgia, serif;
+      font-size: 22px;
+      line-height: 1.2;
+    }
+    .dateblock .updated {
+      margin-top: 8px;
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    .refresh {
+      display: inline-block;
+      margin-top: 12px;
+      padding: 6px 10px;
+      border: 1px solid var(--ink);
+      text-decoration: none;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+    }
+
+    .refresh:hover { background: var(--ink); color: var(--bg); }
+
+    .jumps {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 10px 18px;
+      padding: 14px 0;
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--line);
+    }
+
+    .jumps a {
+      display: inline-flex;
+      align-items: center;
+      text-decoration: none;
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .jumps em {
+      margin-left: 8px;
+      font-style: normal;
+      font-weight: 500;
+      color: var(--muted);
+    }
+
+    .banner {
+      margin: 16px 0 0;
+      padding: 12px 14px;
+      background: var(--banner);
+      color: var(--banner-ink);
+      font-size: 14px;
+    }
+
+    .section { margin-top: 42px; scroll-margin-top: 16px; }
+
+    .section-head {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      gap: 16px;
+      margin-bottom: 8px;
+    }
+
+    .section-head h2 {
+      margin: 0;
+      font-family: "Figtree", sans-serif;
+      font-size: 14px;
+      font-weight: 600;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+    }
+
+    .section-head p {
+      margin: 0;
+      color: var(--muted);
+      font-family: "Newsreader", Georgia, serif;
+      font-style: italic;
+      font-size: 17px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(3, minmax(0, 1fr));
+      gap: 22px 28px;
+      margin-top: 8px;
+    }
+
+    .card {
+      border-top: 1px solid var(--line);
+      padding: 14px 2px 6px;
+      min-width: 0;
+    }
+
+    .card.lead {
+      grid-column: span 2;
+      background: var(--paper);
+      border-top: 3px solid var(--ink);
+      padding: 20px 20px 16px;
+    }
+
+    .meta {
+      display: flex;
+      justify-content: space-between;
+      gap: 12px;
+      margin: 0 0 8px;
+      font-size: 11px;
+      font-weight: 600;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--muted);
+    }
+
+    .source { text-decoration: none; color: var(--ink); }
+    .source:hover { text-decoration: underline; text-underline-offset: 3px; }
+
+    h3 {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 400;
+      font-size: 26px;
+      letter-spacing: -0.02em;
+      line-height: 1.12;
+    }
+
+    .lead h3 { font-size: clamp(32px, 4vw, 44px); line-height: 1.05; }
+
+    h3 a { text-decoration: none; }
+    h3 a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 4px; }
+
+    .card[data-category="research"] h3 a:hover { color: var(--research); }
+    .card[data-category="products"] h3 a:hover { color: var(--products); }
+    .card[data-category="industry"] h3 a:hover { color: var(--industry); }
+
+    .summary {
+      margin: 10px 0 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 400;
+      font-size: 17px;
+      line-height: 1.4;
+      color: var(--muted);
+    }
+
+    .lead .summary { font-size: 19px; max-width: 42rem; }
+
+    .origin {
+      display: inline-block;
+      margin-top: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-decoration: none;
+      color: var(--muted);
+    }
+
+    .origin::after { content: " →"; }
+    .origin:hover { color: var(--ink); }
+
+    .empty {
+      margin-top: 36px;
+      padding: 28px 0;
+      border-top: 1px solid var(--ink);
+    }
+
+    .empty h2 {
+      margin: 0;
+      font-family: "Newsreader", Georgia, serif;
+      font-weight: 400;
+      font-size: 36px;
+    }
+
+    .empty p { max-width: 36rem; color: var(--muted); font-size: 18px; }
+
+    footer {
+      margin-top: 56px;
+      padding-top: 18px;
+      border-top: 1px solid var(--ink);
+      color: var(--muted);
+      font-size: 13px;
+    }
+
+    footer a { color: var(--ink); }
+    footer p { margin: 0 0 8px; }
+    footer .fine { max-width: 48rem; }
+
+    @media (max-width: 980px) {
+      .grid { grid-template-columns: 1fr 1fr; }
+      .card.lead { grid-column: span 2; }
+    }
+
+    @media (max-width: 700px) {
+      .masthead { grid-template-columns: 1fr; }
+      .dateblock { text-align: left; }
+      .grid { grid-template-columns: 1fr; }
+      .card.lead { grid-column: auto; padding: 16px; }
+      .section-head { flex-direction: column; align-items: flex-start; }
+      .folio { letter-spacing: 0.08em; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+    }
+  </style>
+</head>
+<body>
+  <a class="skip" href="#briefing">Skip to stories</a>
+  <div class="folio">
+    <span>AI News Curator</span>
+    <span>Public feeds</span>
+    <span>No account</span>
+  </div>
+  <div class="stripe" aria-hidden="true">
+    <span class="research"></span>
+    <span class="products"></span>
+    <span class="industry"></span>
+  </div>
+  <div class="wrap">
+    <header>
+      <div class="masthead">
+        <div>
+          <p class="kicker">Live briefing</p>
+          <h1>Today in <em>AI</em></h1>
+        </div>
+        <div class="dateblock">
+          <!--DATEBLOCK-->
+        </div>
+      </div>
+      <p class="dek">Research, product launches, and the industry press.</p>
+    </header>
+    <!--JUMPS-->
+    <!--BANNER-->
+    <main id="briefing">
+      <!--SECTIONS-->
+    </main>
+    <footer>
+      <!--FOOTER-->
+    </footer>
+  </div>
+</body>
+</html>
